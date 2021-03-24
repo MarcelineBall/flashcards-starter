@@ -8,7 +8,7 @@ describe('Turn', function(){
 
   it('should be a function', function() {
     const turn = new Turn();
-    expect(turn).to.be.a('function');
+    expect(Turn).to.be.a('function');
   });
 
   it('should be an instance of Turn', function() {
@@ -26,5 +26,5 @@ describe('Turn', function(){
     const turn = new Turn('object', card);
     expect(turn.card.id).to.equal(1)
   })
-  
+
 })
