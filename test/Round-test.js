@@ -5,33 +5,34 @@ const Deck = require('../src/Deck');
 const Card = require('../src/Card');
 const Round = require('../src/Round');
 
-describe('Round', function() {
+describe('Round', () => {
+  let card1;
+  let card2;
+  let card3;
+  let deck;
+  let round;
+  beforeEach(() => {
+    card1 = new Card(1, 'What allows you to define a set of related information using key-value pairs?', '["object", "array", "function"]', 'object');
+    card2 = new Card(3, 'What type of prototype method directly modifies the existing array?', '["mutator method", "accessor method", "iteration method"]', 'mutator method');
+    card3 = new Card(5, 'What type of prototype method loops through the existing array and applies a callback function that may mutate each element and return a new value?', '["mutator method", "accessor method", "iteration method"]', 'iteration method');
+    deck = new Deck([card1, card2, card3]);
+    round = new Round(deck);
+  });
 
-  it.skip('should be a function', function() {
-    const round = new Round();
+  it('should be a function', function() {
     expect(Round).to.be.a('function');
   });
 
-  it.skip('should be an instance of Round', function() {
-    const round = new Round();
+  it('should be an instance of Round', function() {
     expect(round).to.be.an.instanceof(Round);
   });
 
   it('should be able to take in a deck', function() {
-    const card1 = new Card(1, 'What allows you to define a set of related information using key-value pairs?', '["object", "array", "function"]', 'object');
-    const card2 = new Card(3, 'What type of prototype method directly modifies the existing array?', '["mutator method", "accessor method", "iteration method"]', 'mutator method');
-    const card3 = new Card(5, 'What type of prototype method loops through the existing array and applies a callback function that may mutate each element and return a new value?', '["mutator method", "accessor method", "iteration method"]', 'iteration method');
-    const deck = new Deck([card1, card2, card3]);
-    const round = new Round(deck);
+
     expect(round.deck).to.equal(deck);
   })
 
   it('should return the current card', function() {
-    const card1 = new Card(1, 'What allows you to define a set of related information using key-value pairs?', '["object", "array", "function"]', 'object');
-    const card2 = new Card(3, 'What type of prototype method directly modifies the existing array?', '["mutator method", "accessor method", "iteration method"]', 'mutator method');
-    const card3 = new Card(5, 'What type of prototype method loops through the existing array and applies a callback function that may mutate each element and return a new value?', '["mutator method", "accessor method", "iteration method"]', 'iteration method');
-    const deck = new Deck([card1, card2, card3]);
-    const round = new Round(deck);
     expect(round.returnCurrentCard()).to.deep.equal({ id: 1,
                                                question: 'What allows you to define a set of related information using key-value pairs?',
                                                answers: '["object", "array", "function"]',
@@ -39,7 +40,7 @@ describe('Round', function() {
                                              })
   })
 
-  it('should be able to take the next turn', function() {
+  it.skip('should be able to take the next turn', function() {
     const card1 = new Card(1, 'What allows you to define a set of related information using key-value pairs?', '["object", "array", "function"]', 'object');
     const card2 = new Card(3, 'What type of prototype method directly modifies the existing array?', '["mutator method", "accessor method", "iteration method"]', 'mutator method');
     const card3 = new Card(5, 'What type of prototype method loops through the existing array and applies a callback function that may mutate each element and return a new value?', '["mutator method", "accessor method", "iteration method"]', 'iteration method');
