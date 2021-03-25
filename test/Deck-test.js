@@ -1,6 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 
+const Deck = require('../src/Deck');
 const Card = require('../src/Card');
 
 describe('Deck', function() {
@@ -20,8 +21,8 @@ describe('Deck', function() {
     const card2 = new Card(3, 'What type of prototype method directly modifies the existing array?', '["mutator method", "accessor method", "iteration method"]', 'mutator method');
     const card3 = new Card(5, 'What type of prototype method loops through the existing array and applies a callback function that may mutate each element and return a new value?', '["mutator method", "accessor method", "iteration method"]', 'iteration method');
     const deck = new Deck([card1, card2, card3]);
-    expect(deck.cards).to.equal([card1, card2, card3]);
-    expect(deck.cards.card2.id).to.equal(3);
+    expect(deck.cards).to.deep.equal([card1, card2, card3]);
+    expect(deck.cards[1].id).to.equal(3);
   })
 
   it('should be able to count the cards in the deck', function() {
@@ -29,6 +30,6 @@ describe('Deck', function() {
     const card2 = new Card(3, 'What type of prototype method directly modifies the existing array?', '["mutator method", "accessor method", "iteration method"]', 'mutator method');
     const card3 = new Card(5, 'What type of prototype method loops through the existing array and applies a callback function that may mutate each element and return a new value?', '["mutator method", "accessor method", "iteration method"]', 'iteration method');
     const deck = new Deck([card1, card2, card3]);
-    expect(deck.countCards).to.equal(3);
+    expect(deck.countCards()).to.equal(3);
   })
 })
