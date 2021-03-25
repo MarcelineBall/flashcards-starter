@@ -3,6 +3,7 @@ const expect = chai.expect;
 
 const Deck = require('../src/Deck');
 const Card = require('../src/Card');
+const Turn = require('../src/Turn');
 const Round = require('../src/Round');
 
 describe('Round', () => {
@@ -40,44 +41,61 @@ describe('Round', () => {
                                              })
   })
 
-  it.skip('should be able to take the next turn', function() {
-    const card1 = new Card(1, 'What allows you to define a set of related information using key-value pairs?', '["object", "array", "function"]', 'object');
-    const card2 = new Card(3, 'What type of prototype method directly modifies the existing array?', '["mutator method", "accessor method", "iteration method"]', 'mutator method');
-    const card3 = new Card(5, 'What type of prototype method loops through the existing array and applies a callback function that may mutate each element and return a new value?', '["mutator method", "accessor method", "iteration method"]', 'iteration method');
-    const deck = new Deck(deck);
-    const round = new Round(deck);
+  describe('takeTurn method', function() {
 
-    expect(round.turns).to.equal(0);
-    expect(round.incorrectGuesses).to.equal([]);
+    it('should be able to create new instance of turn', funtion() {
+      round.takeTurn('object');
+      expect(round.currentTurn).to.be.an.instanceof(Turn);
+    })
 
-    round.takeTurn('object')
-    round.takeTurn('accessor method')
+    it('should be able to update turn count if guess is correct or not', function() {
+      expect(round.turns).to.equal(0);
+      round.takeTurn('object');
+      expect(round.turns).to.equal(1);
+      round.takeTurn('accessor method');
+      expect(round.turns).to.equal(2);
+    })
 
-    expect(round.incorrectGuesses).to.equal([3]);
-    expect(round.returnCurrentCard()).to.equal({ id: 5,
-                                               question: 'What type of prototype method loops through the existing array and applies a callback function that may mutate each element and return a new value?',
-                                               answers: '["mutator method", "accessor method", "iteration method"]',
-                                               correctAnswer: 'iteration method'
-                                             })
+    it('should be able to make the next card the current card', function() {
+      const secondCard = {id: 3,
+                          question: 'What type of prototype method directly modifies the existing array?',
+                          answers: '["mutator method", "accessor method", "iteration method"]',
+                          correctAnswer: 'mutator method'}
+      expect(round.deck[1]).to.equal(secondCard);
+      round.takeTurn('object');
+      expect(round.currentCard).to.equal(secondCard);
+    })
+
+    it('should evaluate the guess. Incorrect guesses should be recorded', function() {
+
+    })
+
+    it.skip('should be able to take the next turn', function() {
+
+      expect(round.turns).to.equal(0);
+      expect(round.incorrectGuesses).to.equal([]);
+
+      round.takeTurn('object')
+      round.takeTurn('accessor method')
+
+      expect(round.incorrectGuesses).to.equal([3]);
+      expect(round.returnCurrentCard()).to.equal({ id: 5,
+        question: 'What type of prototype method loops through the existing array and applies a callback function that may mutate each element and return a new value?',
+        answers: '["mutator method", "accessor method", "iteration method"]',
+        correctAnswer: 'iteration method'
+      })
+    })
   })
 
   it.skip('should be able to calculate the persentage of correct guesses', function() {
-    const card1 = new Card(1, 'What allows you to define a set of related information using key-value pairs?', '["object", "array", "function"]', 'object');
-    const card2 = new Card(3, 'What type of prototype method directly modifies the existing array?', '["mutator method", "accessor method", "iteration method"]', 'mutator method');
-    const card3 = new Card(5, 'What type of prototype method loops through the existing array and applies a callback function that may mutate each element and return a new value?', '["mutator method", "accessor method", "iteration method"]', 'iteration method');
-    const deck = new Deck(deck);
-    const round = new Round(deck);
+
     round.takeTurn('object')
     round.takeTurn('accessor method')
     expect(round.calculatePercentCorrect().to.equal(50))
   })
 
   it.skip('should be able to end the round', function() {
-    const card1 = new Card(1, 'What allows you to define a set of related information using key-value pairs?', '["object", "array", "function"]', 'object');
-    const card2 = new Card(3, 'What type of prototype method directly modifies the existing array?', '["mutator method", "accessor method", "iteration method"]', 'mutator method');
-    const card3 = new Card(5, 'What type of prototype method loops through the existing array and applies a callback function that may mutate each element and return a new value?', '["mutator method", "accessor method", "iteration method"]', 'iteration method');
-    const deck = new Deck(deck);
-    const round = new Round(deck);
+
     round.takeTurn('object')
     round.takeTurn('accessor method')
     expect(round.endRound()).to.equal(`** Round over! ** You answered ${round.calculatePercentCorrect()}% of the questions correctly!`)
