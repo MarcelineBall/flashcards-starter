@@ -66,29 +66,30 @@ describe('Round', () => {
       expect(round.currentCard).to.deep.equal(secondCard);
     })
 
-    it.skip('should evaluate the guess. Incorrect guesses should be recorded', function() {
+    it('should evaluate the guess. Incorrect guesses should be recorded', function() {
       round.takeTurn('object');
-      expect(round.incorrectGuesses).to.equal([])
+      expect(round.incorrectGuesses).to.deep.equal([])
       round.takeTurn('array')
       expect(round.incorrectGuesses).to.deep.equal([3])
     })
 
-    it.skip('should return if the guess is correct or not', function() {
+    it('should return if the guess is correct or not', function() {
       expect(round.takeTurn('object')).to.equal('correct!')
       expect(round.takeTurn('array')).to.equal('incorrect!')
     })
 
-  it.skip('should be able to calculate the persentage of correct guesses', function() {
+  it('should be able to calculate the persentage of correct guesses', function() {
 
     round.takeTurn('object')
     round.takeTurn('accessor method')
-    expect(round.calculatePercentCorrect().to.equal(50))
+    expect(round.calculatePercentCorrect()).to.equal(50)
   })
 
-  it.skip('should be able to end the round', function() {
+  it('should be able to end the round', function() {
 
     round.takeTurn('object')
     round.takeTurn('accessor method')
-    expect(round.endRound()).to.equal(`** Round over! ** You answered ${round.calculatePercentCorrect()}% of the questions correctly!`)
+    expect(round.endRound()).to.equal(`** Round over! ** You answered 50% of the questions correctly!`)
   })
+})
 })
