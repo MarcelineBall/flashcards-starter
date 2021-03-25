@@ -67,26 +67,17 @@ describe('Round', () => {
     })
 
     it.skip('should evaluate the guess. Incorrect guesses should be recorded', function() {
-
+      round.takeTurn('object');
+      expect(round.incorrectGuesses).to.equal([])
+      round.takeTurn('array')
+      expect(round.incorrectGuesses).to.deep.equal([3])
     })
 
-  //   it.skip('should be able to take the next turn', function() {
-  //
-  //     expect(round.turns).to.equal(0);
-  //     expect(round.incorrectGuesses).to.equal([]);
-  //
-  //     round.takeTurn('object')
-  //     round.takeTurn('accessor method')
-  //
-  //     expect(round.incorrectGuesses).to.equal([3]);
-  //     expect(round.returnCurrentCard()).to.equal({ id: 5,
-  //       question: 'What type of prototype method loops through the existing array and applies a callback function that may mutate each element and return a new value?',
-  //       answers: '["mutator method", "accessor method", "iteration method"]',
-  //       correctAnswer: 'iteration method'
-  //     })
-  //   })
-  // })
-  })
+    it.skip('should return if the guess is correct or not', function() {
+      expect(round.takeTurn('object')).to.equal('correct!')
+      expect(round.takeTurn('array')).to.equal('incorrect!')
+    })
+
   it.skip('should be able to calculate the persentage of correct guesses', function() {
 
     round.takeTurn('object')
