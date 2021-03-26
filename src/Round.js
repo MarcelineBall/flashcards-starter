@@ -13,7 +13,7 @@ class Round {
   takeTurn(guess) {
     this.currentTurn = new Turn(guess, this.currentCard)
     this.turnCount++
-    this.currentCard = this.deck.cards[1]
+    this.currentCard = this.deck.cards[this.turnCount]
     if (this.currentTurn.evaluateGuess()) {
       return this.currentTurn.giveFeedback()
     } else if (!this.currentTurn.evaluateGuess()) {
@@ -22,9 +22,11 @@ class Round {
     }
   }
   calculatePercentCorrect() {
+    console.log(this.incorrectGuesses.length / this.turnCount) * 100
     return (this.incorrectGuesses.length / this.turnCount) * 100
   }
   endRound() {
+    console.log(`** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`)
     return `** Round over! ** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`
   }
 }
