@@ -28,12 +28,6 @@ describe('Game', function(){
       expect(game.currentRound.deck.cards.length).to.equal(30)
     })
 
-    it('should invoke printMessage', function() {
-      expect(game.printMessage()).to.equal('Welcome to FlashCards! You are playing with 30 cards.')
-    })
 
-    it('should invoke printQuestion', function() {
-      expect(printQuestion()).to.equal(true)
-    })
   })
 })
